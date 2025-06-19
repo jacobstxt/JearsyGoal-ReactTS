@@ -7,6 +7,7 @@ import DashboardHome from "./pages/Dashboard/DashboardHome.tsx";
 import CategoriesListPage from "./pages/Categories";
 import NotFound from "./pages/OtherPage/NotFound.tsx";
 import React from "react";
+import CategoriesCreatePage from "./pages/Categories/create";
 
 const App: React.FC = () => {
     return (
@@ -24,6 +25,7 @@ const App: React.FC = () => {
 
                         <Route path="categories">
                             <Route index  element={<CategoriesListPage />} />
+                            <Route  path={"create"} element={<CategoriesCreatePage/>} />
                         </Route>
                     </Route>
 
