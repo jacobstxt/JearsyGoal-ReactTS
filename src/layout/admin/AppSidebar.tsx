@@ -29,7 +29,10 @@ const navItems: NavItem[] = [
     {
         name: "Categories",
         icon: <TableIcon />,
-        subItems: [{ name: "List", path: "/admin/categories", pro: false }],
+        subItems: [
+            { name: "List", path: "/admin/categories", pro: false },
+            { name: "Create", path: "/admin/categories/create", pro: false }
+        ],
     },
     {
         name: "Products",
