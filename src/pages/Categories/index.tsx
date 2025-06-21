@@ -1,4 +1,4 @@
-import {useGetAllCategoriesQuery} from "../../services/apiCategory.ts";
+import {useDeleteCategoryByIdMutation, useGetAllCategoriesQuery} from "../../services/apiCategory.ts";
 import {
     Table,
     TableBody,
@@ -7,20 +7,34 @@ import {
     TableRow,
 } from "../../components/ui/table";
 import {APP_ENV} from "../../env";
-import { EditOutlined } from '@ant-design/icons';
+import {CloseCircleFilled, EditOutlined} from '@ant-design/icons';
 import {useNavigate} from "react-router";
+import React, { useRef } from "react";
+import DeleteConfirmModal, {type DeleteConfirmModalRef} from "../../components/common/DeleteConfirmModal.tsx";
+import {Button} from "antd";
 
 const CategoriesListPage: React.FC = () => {
     const navigate = useNavigate();
     const { data: categories, isLoading, isError } = useGetAllCategoriesQuery();
+    const [deleteCategory, { isLoading: isDeleting }] = useDeleteCategoryByIdMutation();
+    const modalRef = useRef<DeleteConfirmModalRef>(null);
+
 
     if (isLoading) return <p>Loading...</p>;
     if (isError || !categories) return <p>Something went wrong.</p>;
 
 
+
+
+    // @ts-ignore
     function handleEdit(id) {
         navigate("edit/"+ id);
     }
+
+    const handleDelete = async (id: number) => {
+        await deleteCategory(id);
+    };
+
 
     return (
         <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
@@ -67,13 +81,14 @@ const CategoriesListPage: React.FC = () => {
                                 </TableCell>
 
                                 <TableCell className="py-3">
-                                    <button
+                                    <Button
                                         onClick={() => handleEdit(category.id)}
-                                        className="text-blue-600 hover:text-blue-800"
+                                        className="mr-3"
                                         aria-label={`Edit ${category.name}`}>
+                                        <EditOutlined/>
+                                    </Button>
 
-                                        <EditOutlined style={{ fontSize: '20px' }} />
-                                    </button>
+                                    <Button danger icon={<CloseCircleFilled />} onClick={() => modalRef.current?.open(category.id)} />
                                 </TableCell>
                                 
                             </TableRow>
@@ -81,6 +96,8 @@ const CategoriesListPage: React.FC = () => {
                     </TableBody>
                 </Table>
             </div>
+
+            <DeleteConfirmModal ref={modalRef} onDelete={handleDelete} loading={isDeleting} />
         </div>
     );
 }

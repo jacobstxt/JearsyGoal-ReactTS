@@ -1,52 +1,46 @@
-import {Button, Form, type FormProps, Input, Upload} from "antd";
+import {Button, Form, type FormProps, Input} from "antd";
 import type {ICategoryCreate} from "../../../services/types.ts";
-import { PlusOutlined } from '@ant-design/icons';
 import { useCreateCategoryMutation } from "../../../services/apiCategory.ts";
 import Swal from 'sweetalert2';
 import React from "react";
+import LoadingOverlay from "../../../components/ui/loading/LoadingOverlay.tsx";
+import {useNavigate} from "react-router";
+import ImageUploadFormItem from "../../../components/ui/form/ImageUploadFormItem.tsx";
 
 const CategoriesCreatePage: React.FC = () => {
-    const [createCategory] = useCreateCategoryMutation();
+    const [createCategory, {isLoading}] = useCreateCategoryMutation();
+    const navigate = useNavigate();
 
-
-    const onFinish: FormProps<ICategoryCreate>['onFinish'] = (values) => {
-        console.log('Submit Form:', values);
-        createCategory(values)
-            .unwrap()
-            .then(async () => {
-                await Swal.fire({
-                    icon: 'success',
-                    title: 'Успіх',
-                    text: 'Категорію успішно створено!',
-                    timer: 2000,
-                    showConfirmButton: false,
-                });
-                console.log('Категорія створена');
+    const onFinish: FormProps<ICategoryCreate>['onFinish'] =  async  (values) => {
+        try {
+            console.log('Submit Form:', values);
+            await createCategory(values).unwrap();
+            await Swal.fire({
+                icon: 'success',
+                title: 'Успіх',
+                text: 'Категорію успішно створено!',
+                timer: 2000,
+                showConfirmButton: false,
             })
-            .catch(async (error) => {
-                await Swal.fire({
-                    icon: 'error',
-                    title: 'Помилка',
-                    text: 'Не вдалося створити категорію. Перевірте введені дані.',
-                });
-                console.error('Помилка створення:', error);
-            });
-    };
-
-    const normFile = (e: any) => {
-        if (Array.isArray(e)) {
-            return e;
+            navigate('/admin/categories');
+        } catch {
+            await Swal.fire({
+                icon: 'error',
+                title: 'Помилка',
+                text: 'Не вдалося створити категорію. Перевірте введені дані.',
+            })
         }
-        return e?.fileList;
-    };
+    }
+
+
 
     return (
       <>
         <div
             className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
             <div className="max-w-full overflow-x-auto">
+                {isLoading && <LoadingOverlay></LoadingOverlay>}
                 <h1 className="text-2xl font-bold mb-6 text-center">Додати категорію</h1>
-
                 <Form labelCol={{span: 7}}
                 wrapperCol={{span: 10}}
                 onFinish={onFinish}
@@ -66,18 +60,7 @@ const CategoriesCreatePage: React.FC = () => {
                     <Input placeholder="Введіть слаг категорії"/>
                 </Form.Item>
 
-
-                <Form.Item<ICategoryCreate> label="Фото" name="image" valuePropName="fileList" getValueFromEvent={normFile}>
-                    <Upload listType="picture-card"
-                            beforeUpload={() => false}>
-                        <button
-                            style={{ color: 'inherit', cursor: 'inherit', border: 0, background: 'none' }}
-                            type="button">
-                            <PlusOutlined />
-                            <div style={{ marginTop: 8 }}>Додати Фото</div>
-                        </button>
-                    </Upload>
-                </Form.Item>
+                    <ImageUploadFormItem name="image" label="Фоточка" />
 
                 <Form.Item label={null}>
                     <Button type="primary" htmlType="submit">
