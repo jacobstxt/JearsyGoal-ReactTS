@@ -3,6 +3,7 @@ import type {ICategoryCreate} from "../../../services/types.ts";
 import { PlusOutlined } from '@ant-design/icons';
 import { useCreateCategoryMutation } from "../../../services/apiCategory.ts";
 import Swal from 'sweetalert2';
+import React from "react";
 
 const CategoriesCreatePage: React.FC = () => {
     const [createCategory] = useCreateCategoryMutation();
