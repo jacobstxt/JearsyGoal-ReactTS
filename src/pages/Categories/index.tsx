@@ -12,6 +12,7 @@ import {useNavigate} from "react-router";
 import React, { useRef } from "react";
 import DeleteConfirmModal, {type DeleteConfirmModalRef} from "../../components/common/DeleteConfirmModal.tsx";
 import {Button} from "antd";
+import {Helmet} from "react-helmet-async";
 
 const CategoriesListPage: React.FC = () => {
     const navigate = useNavigate();
@@ -37,6 +38,10 @@ const CategoriesListPage: React.FC = () => {
 
 
     return (
+        <>
+            <Helmet>
+                <title>Категорії | Адмін панель</title>
+            </Helmet>
         <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
             <div className="flex flex-col gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between">
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
@@ -88,7 +93,7 @@ const CategoriesListPage: React.FC = () => {
                                         <EditOutlined/>
                                     </Button>
 
-                                    <Button danger icon={<CloseCircleFilled />} onClick={() => modalRef.current?.open(category.id)} />
+                                    <Button danger icon={<CloseCircleFilled />} onClick={() => modalRef.current?.open(Number(category.id))} />
                                 </TableCell>
                                 
                             </TableRow>
@@ -99,6 +104,7 @@ const CategoriesListPage: React.FC = () => {
 
             <DeleteConfirmModal ref={modalRef} onDelete={handleDelete} loading={isDeleting} />
         </div>
+        </>
     );
 }
 

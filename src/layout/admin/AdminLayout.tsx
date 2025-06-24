@@ -3,6 +3,7 @@ import {SidebarProvider, useSidebar} from "../../context/SidebarContext.tsx";
 import {Outlet} from "react-router";
 import Backdrop from "./Backdrop.tsx";
 import AppHeader from "./AppHeader.tsx";
+import {Helmet} from "react-helmet-async";
 
 const LayoutContent: React.FC = () => {
     const { isExpanded, isHovered, isMobileOpen } = useSidebar();
@@ -31,9 +32,14 @@ const LayoutContent: React.FC = () => {
 
 const AdminLayout: React.FC = () => {
     return (
+        <>
+            <Helmet>
+                <title>Адмін панель</title>
+            </Helmet>
         <SidebarProvider>
             <LayoutContent />
         </SidebarProvider>
+        </>
     );
 };
 

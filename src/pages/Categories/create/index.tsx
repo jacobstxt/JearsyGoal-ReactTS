@@ -6,6 +6,7 @@ import React from "react";
 import LoadingOverlay from "../../../components/ui/loading/LoadingOverlay.tsx";
 import {useNavigate} from "react-router";
 import ImageUploadFormItem from "../../../components/ui/form/ImageUploadFormItem.tsx";
+import {Helmet} from "react-helmet-async";
 
 const CategoriesCreatePage: React.FC = () => {
     const [createCategory, {isLoading}] = useCreateCategoryMutation();
@@ -36,6 +37,9 @@ const CategoriesCreatePage: React.FC = () => {
 
     return (
       <>
+          <Helmet>
+              <title>Створення категорії | Адмін панель</title>
+          </Helmet>
         <div
             className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
             <div className="max-w-full overflow-x-auto">
