@@ -9,6 +9,7 @@ import NotFound from "./pages/OtherPage/NotFound.tsx";
 import React from "react";
 import CategoriesCreatePage from "./pages/Categories/create";
 import CategoriesEditPage from "./pages/Categories/edit";
+import LoginPage from "./pages/Account/Login";
 
 const App: React.FC = () => {
     return (
@@ -29,6 +30,10 @@ const App: React.FC = () => {
                             <Route  path={"create"} element={<CategoriesCreatePage/>} />
                             <Route  path={"edit/:id"} element={<CategoriesEditPage/>} />
                         </Route>
+                    </Route>
+
+                    <Route path="account">
+                        <Route  path={"login"} element={<LoginPage/>} />
                     </Route>
 
                     <Route path="*" element={<NotFound />} />

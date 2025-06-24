@@ -1,8 +1,20 @@
-import {Link, Outlet} from "react-router";
+import {Link, Outlet, useNavigate} from "react-router";
 import { Pizza } from "lucide-react";
 import React from "react";
+import {useAppDispatch, useAppSelector} from "../../store";
+import {APP_ENV} from "../../env";
+import {logout} from "../../store/authSlice.ts";
 
 const UserLayout: React.FC = () => {
+    const { user } = useAppSelector(state=>state.auth);
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+
+    function logoutUser() {
+        dispatch(logout());
+        navigate('/');
+    }
+
     return (
         <div className="min-h-screen flex flex-col bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
 
@@ -11,10 +23,25 @@ const UserLayout: React.FC = () => {
                     <Pizza className="w-6 h-6" />
                     Pizza 39
                 </h1>
+
+
                 <nav className="space-x-4">
-                    <Link to="/menu" className="hover:underline">Меню</Link>
-                    <Link to="/cart" className="hover:underline">Кошик</Link>
-                    <Link to="/admin/home" className="bg-white text-red-600 px-3 py-1 rounded hover:bg-red-100 font-semibold">Адмін панель</Link>
+                    {user ? (
+                        <div className="flex items-center gap-2">
+                            <img src={`${APP_ENV.IMAGES_50_URL}${user?.image}`}
+                                 alt="Avatar" className="rounded-circle mx-3"
+                                 // onClick={ () =>  navigate("Orders") }
+                            />
+                            <span className={"mx-3 text-white"}>{user.email}</span>
+                            <button className={"mx-3 btn btn btn-light"} onClick={logoutUser}>Вийти</button>
+                        </div>
+                    ) : (
+
+                        <nav className="space-x-4">
+                            <Link to="/account/login" className="hover:underline">Вхід</Link>
+                            <Link to="/account/register" className="hover:underline">Реєстрація</Link>
+                        </nav>
+                    )}
                 </nav>
             </header>
 
