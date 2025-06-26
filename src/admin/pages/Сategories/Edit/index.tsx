@@ -1,11 +1,11 @@
 import React from "react";
 import {Button, Form, Input} from "antd";
-import type {ICategoryEdit} from "../../../services/types.ts";
-import {useGetCategoryByIdQuery, useUpdateCategoryMutation} from "../../../services/apiCategory.ts";
+import type {ICategoryEdit} from "../../../../services/types.ts";
+import {useGetCategoryByIdQuery, useUpdateCategoryMutation} from "../../../../services/apiCategory.ts";
 import {useNavigate, useParams} from "react-router";
 import Swal from 'sweetalert2';
-import LoadingOverlay from "../../../components/ui/loading/LoadingOverlay.tsx";
-import ImageUploadFormItem from "../../../components/ui/form/ImageUploadFormItem.tsx";
+import LoadingOverlay from "../../../../components/ui/loading/LoadingOverlay.tsx";
+import ImageUploadFormItem from "../../../../components/ui/form/ImageUploadFormItem.tsx";
 import {Helmet} from "react-helmet-async";
 
 

@@ -37,7 +37,7 @@ const RegistrationPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-[80vh] flex items-center justify-center px-4">
+        <div className="min-h-[80vh] flex items-center justify-center mt-7 px-4">
             <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-800 animate-fade-in">
                 {isLoading && <LoadingOverlay />}
 
@@ -59,6 +59,8 @@ const RegistrationPage: React.FC = () => {
                         />
                     </Form.Item>
 
+                    <div className="flex gap-4">
+
                     <Form.Item<IRegister>
                         label={<span className="text-gray-700 dark:text-white font-medium">Ім'я</span>}
                         name="Name"
@@ -78,6 +80,10 @@ const RegistrationPage: React.FC = () => {
                             className="rounded-lg py-2 px-4 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-orange-400 transition"
                         />
                     </Form.Item>
+
+                    </div>
+
+                    <div className="flex gap-4">
 
                     <Form.Item<IRegister>
                         label={<span className="text-gray-700 dark:text-white font-medium">Пароль</span>}
@@ -100,6 +106,8 @@ const RegistrationPage: React.FC = () => {
                         />
                     </Form.Item>
 
+                    </div>
+
                     <ImageUploadFormItem name="Avatar" label="Фото" />
 
                     <Form.Item>
@@ -108,7 +116,7 @@ const RegistrationPage: React.FC = () => {
                             htmlType="submit"
                             className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg transition"
                         >
-                            Увійти
+                            Зареєструватися
                         </Button>
                     </Form.Item>
                 </Form>

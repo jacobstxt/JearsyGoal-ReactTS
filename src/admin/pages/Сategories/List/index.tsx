@@ -1,21 +1,20 @@
-import {useDeleteCategoryByIdMutation, useGetAllCategoriesQuery} from "../../services/apiCategory.ts";
+import {useDeleteCategoryByIdMutation, useGetAllCategoriesQuery} from "../../../../services/apiCategory.ts";
 import {
     Table,
     TableBody,
     TableCell,
     TableHeader,
     TableRow,
-} from "../../components/ui/table";
-import {APP_ENV} from "../../env";
+} from "../../../../components/ui/table";
+import {APP_ENV} from "../../../../env";
 import {CloseCircleFilled, EditOutlined} from '@ant-design/icons';
-import {useNavigate} from "react-router";
+import {Link, useNavigate} from "react-router";
 import React, { useRef } from "react";
-import DeleteConfirmModal, {type DeleteConfirmModalRef} from "../../components/common/DeleteConfirmModal.tsx";
-import {Button} from "antd";
+import DeleteConfirmModal, {type DeleteConfirmModalRef} from "../../../../components/common/DeleteConfirmModal.tsx";
+import {Button, Space} from "antd";
 import {Helmet} from "react-helmet-async";
 
 const CategoriesListPage: React.FC = () => {
-    const navigate = useNavigate();
     const { data: categories, isLoading, isError } = useGetAllCategoriesQuery();
     const [deleteCategory, { isLoading: isDeleting }] = useDeleteCategoryByIdMutation();
     const modalRef = useRef<DeleteConfirmModalRef>(null);
@@ -26,11 +25,6 @@ const CategoriesListPage: React.FC = () => {
 
 
 
-
-    // @ts-ignore
-    function handleEdit(id) {
-        navigate("edit/"+ id);
-    }
 
     const handleDelete = async (id: number) => {
         await deleteCategory(id);
@@ -86,14 +80,12 @@ const CategoriesListPage: React.FC = () => {
                                 </TableCell>
 
                                 <TableCell className="py-3">
-                                    <Button
-                                        onClick={() => handleEdit(category.id)}
-                                        className="mr-3"
-                                        aria-label={`Edit ${category.name}`}>
-                                        <EditOutlined/>
-                                    </Button>
-
-                                    <Button danger icon={<CloseCircleFilled />} onClick={() => modalRef.current?.open(Number(category.id))} />
+                                    <Space size="middle">
+                                        <Link to={`edit/${category.id}`}>
+                                            <Button icon={<EditOutlined />} />
+                                        </Link>
+                                        <Button danger icon={<CloseCircleFilled />} onClick={() => modalRef.current?.open(category.id)} />
+                                    </Space>
                                 </TableCell>
                                 
                             </TableRow>

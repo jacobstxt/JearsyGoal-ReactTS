@@ -1,11 +1,11 @@
 import {Button, Form, type FormProps, Input} from "antd";
-import type {ICategoryCreate} from "../../../services/types.ts";
-import { useCreateCategoryMutation } from "../../../services/apiCategory.ts";
+import type {ICategoryCreate} from "../../../../services/types.ts";
+import { useCreateCategoryMutation } from "../../../../services/apiCategory.ts";
 import Swal from 'sweetalert2';
 import React from "react";
-import LoadingOverlay from "../../../components/ui/loading/LoadingOverlay.tsx";
+import LoadingOverlay from "../../../../components/ui/loading/LoadingOverlay.tsx";
 import {useNavigate} from "react-router";
-import ImageUploadFormItem from "../../../components/ui/form/ImageUploadFormItem.tsx";
+import ImageUploadFormItem from "../../../../components/ui/form/ImageUploadFormItem.tsx";
 import {Helmet} from "react-helmet-async";
 
 const CategoriesCreatePage: React.FC = () => {

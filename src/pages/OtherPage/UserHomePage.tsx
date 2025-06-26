@@ -19,7 +19,7 @@ const UserHomePage: React.FC = () => {
                     <strong>Pizza 39 — це ваш найкращий вибір!</strong>
                 </p>
                 <Link
-                    to="/menu"
+                    to="products/"
                     className="inline-block bg-red-600 hover:bg-red-500 text-white
                     text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transition">
                     Переглянути меню

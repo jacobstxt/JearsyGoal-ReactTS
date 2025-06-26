@@ -1,5 +1,5 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
-import type {ICategoryCreate, ICategoryEdit, ICategoryItem} from "./types.ts";
+import type {ICategoryCreate, ICategoryDelete, ICategoryEdit, ICategoryItem} from "./types.ts";
 import {createBaseQuery} from "../utilities/createBaseQuery.ts";
 import {serialize} from "object-to-formdata";
 
@@ -52,7 +52,7 @@ export const apiCategory = createApi({
             providesTags: ['Category'],
         }),
 
-        deleteCategoryById: builder.mutation<void, number>({
+        deleteCategoryById: builder.mutation<ICategoryDelete, number>({
             query: (id) => {
                 return {
                     url: `${id}`,

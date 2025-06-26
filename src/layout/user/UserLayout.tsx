@@ -23,7 +23,8 @@ const UserLayout: React.FC = () => {
         <div className="min-h-screen flex flex-col bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
 
             <header className="w-full py-4 px-6 bg-red-600 text-white shadow-lg flex justify-between items-center">
-                <h1 className="text-2xl font-bold tracking-wide flex items-center gap-2">
+                <h1 className="text-2xl font-bold tracking-wide flex items-center gap-2 cursor-pointer"
+                    onClick={() => navigate('/')}>
                     <Pizza className="w-6 h-6" />
                     Pizza 39
                 </h1>
