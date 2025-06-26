@@ -22,4 +22,23 @@ export interface ICategoryDelete {
     id: number;
 }
 
+export interface ServerError {
+    status: number;
+    data: {
+        errors: Record<string, string[]>;
+    };
+}
+
+export interface IRegister
+{
+    Name: string;
+    Surname: string;
+    Email: string;
+    Password: string;
+    ConfirmPassword: string;
+    Avatar: string;
+}
+
+
+
 

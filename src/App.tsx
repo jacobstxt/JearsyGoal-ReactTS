@@ -10,6 +10,7 @@ import React from "react";
 import CategoriesCreatePage from "./pages/Categories/create";
 import CategoriesEditPage from "./pages/Categories/edit";
 import LoginPage from "./pages/Account/Login";
+import RegistrationPage from "./pages/Account/Register";
 
 const App: React.FC = () => {
     return (
@@ -34,6 +35,7 @@ const App: React.FC = () => {
 
                     <Route path="account">
                         <Route  path={"login"} element={<LoginPage/>} />
+                        <Route  path={"register"} element={<RegistrationPage/>} />
                     </Route>
 
                     <Route path="*" element={<NotFound />} />
