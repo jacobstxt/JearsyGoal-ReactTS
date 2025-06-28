@@ -14,6 +14,7 @@ import RegistrationPage from "./pages/Account/Register";
 import ProductsPage from "./pages/Products";
 import AdminProductListPage from "./admin/pages/Products/List/AdminProductListPage.tsx";
 import AdminProductCreatePage from "./admin/pages/Products/Create/AdminProductCreatePage.tsx";
+import ForgotPasswordPage from "./pages/Account/ForgotPassword";
 
 const App: React.FC = () => {
     return (
@@ -34,6 +35,7 @@ const App: React.FC = () => {
                             <Route  path={"register"} element={<RegistrationPage/>} />
                         </Route>
 
+                        <Route  path={"forgot-password"} element={<ForgotPasswordPage/>} />
 
                     </Route>
 
