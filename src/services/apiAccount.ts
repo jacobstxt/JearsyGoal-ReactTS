@@ -15,6 +15,13 @@ export interface IForgotPasswordRequest {
     email: string;
 }
 
+export interface IResetPasswordRequest {
+    password: string;
+    confirmPassword: string;
+    token: string; // Якщо потрібно
+    email: string; // Якщо потрібно
+}
+
 
 export const apiAccount = createApi({
     reducerPath: 'api/account',
@@ -48,7 +55,7 @@ export const apiAccount = createApi({
             query: (data) => ({
                 url: 'ForgotPassword',
                 method: 'POST',
-                body: {data}
+                body: data
             })
         }),
 
@@ -60,11 +67,11 @@ export const apiAccount = createApi({
             })
         }),
 
-        resetPassword: builder.mutation<{password: string}, void>({
+        resetPassword: builder.mutation<IResetPasswordRequest, void>({
             query: (password) => ({
                 url: 'ResetPassword',
                 method: 'POST',
-                body: {password}
+                body: password
             })
         })
 

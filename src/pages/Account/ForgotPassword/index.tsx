@@ -1,21 +1,18 @@
-import { useNavigate } from 'react-router-dom';
 import { Form, type FormProps, Input } from 'antd';
 import {type IForgotPasswordRequest, useForgotPasswordMutation} from "../../../services/apiAccount.ts";
 import LoadingOverlay from "../../../components/ui/loading/LoadingOverlay.tsx";
 import React from "react";
+import {useNavigate} from "react-router";
 
 
 const ForgotPasswordPage: React.FC = () => {
     const [forgot, { isLoading }] = useForgotPasswordMutation();
-
     const navigate = useNavigate();
-
     const onFinish: FormProps<IForgotPasswordRequest>["onFinish"] = async (values) => {
         try {
             // @ts-ignore
             await forgot(values).unwrap();
-
-            navigate('/forgot-success');
+            navigate('/email-sent-success');
 
         } catch (err) {
             console.log("error", err);
