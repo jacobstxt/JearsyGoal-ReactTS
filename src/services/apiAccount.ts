@@ -18,8 +18,16 @@ export interface IForgotPasswordRequest {
 export interface IResetPasswordRequest {
     password: string;
     confirmPassword: string;
-    token: string; // Якщо потрібно
-    email: string; // Якщо потрібно
+    token: string;
+    email: string;
+}
+
+export interface IUser {
+    id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+    image: string;
 }
 
 
@@ -73,7 +81,10 @@ export const apiAccount = createApi({
                 method: 'POST',
                 body: password
             })
-        })
+        }),
+        getAllUsers: builder.query<IUser[], void>({
+            query: () => 'List',
+        }),
 
     }),
 });
@@ -83,6 +94,7 @@ export const {
     useRegisterMutation,
     useLoginByGoogleMutation,
     useForgotPasswordMutation,
-    useValidateResetTokenMutation,
-    useResetPasswordMutation
+    // useValidateResetTokenMutation,
+    useResetPasswordMutation,
+    useGetAllUsersQuery
 } = apiAccount;

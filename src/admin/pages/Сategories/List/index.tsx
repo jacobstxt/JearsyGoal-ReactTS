@@ -41,10 +41,6 @@ const CategoriesListPage: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
                     Categories
                 </h3>
-                <div className="flex items-center gap-3">
-                    <button className="btn">Filter</button>
-                    <button className="btn">See all</button>
-                </div>
             </div>
 
             <div className="max-w-full overflow-x-auto">
