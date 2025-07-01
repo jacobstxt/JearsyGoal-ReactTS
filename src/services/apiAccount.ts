@@ -28,6 +28,7 @@ export interface IUser {
     firstName: string;
     lastName: string;
     image: string;
+    loginTypes: string[];
 }
 
 

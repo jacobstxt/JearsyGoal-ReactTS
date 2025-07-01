@@ -8,7 +8,7 @@ import {
 } from "../../../../components/ui/table";
 import {APP_ENV} from "../../../../env";
 import {CloseCircleFilled, EditOutlined} from '@ant-design/icons';
-import {Link, useNavigate} from "react-router";
+import {Link} from "react-router";
 import React, { useRef } from "react";
 import DeleteConfirmModal, {type DeleteConfirmModalRef} from "../../../../components/common/DeleteConfirmModal.tsx";
 import {Button, Space} from "antd";

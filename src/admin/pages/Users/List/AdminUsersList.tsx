@@ -3,9 +3,28 @@ import {APP_ENV} from "../../../../env";
 import LoadingOverlay from "../../../../components/ui/loading/LoadingOverlay.tsx";
 import React from "react";
 import {useGetAllUsersQuery} from "../../../../services/apiAccount.ts";
+import {Button, Space} from "antd";
+import {CloseCircleFilled, EditOutlined} from "@ant-design/icons";
 
 const AdminUsersListPage: React.FC = () => {
     const {data: users, isLoading} = useGetAllUsersQuery();
+
+
+
+    const getBadgeColor = (type: string) => {
+        switch (type.toLowerCase()) {
+            case 'google':
+                return 'bg-blue-500 text-white';
+            case 'facebook':
+                return 'bg-blue-700 text-white';
+            case 'password':
+                return 'bg-green-500 text-white';
+            case 'twitter':
+                return 'bg-sky-400 text-white';
+            default:
+                return 'bg-gray-400 text-white';
+        }
+    };
 
 
     return (
@@ -27,6 +46,7 @@ const AdminUsersListPage: React.FC = () => {
                                 <TableCell isHeader className="py-3 text-start">Ім'я та прізвище</TableCell>
                                 <TableCell isHeader className="py-3 text-start">email</TableCell>
                                 <TableCell isHeader className="py-3 text-start">Фото</TableCell>
+                                <TableCell isHeader className="py-3 text-start">Вхід</TableCell>
                                 <TableCell isHeader className="py-3 text-start">Дії</TableCell>
                             </TableRow>
                         </TableHeader>
@@ -67,6 +87,30 @@ const AdminUsersListPage: React.FC = () => {
                                                         )}
                                                     </div>
                                                 </TableCell>
+
+                                                <TableCell className="py-3 text-gray-600 dark:text-gray-300 flex gap-2 flex-wrap">
+                                                    {user.loginTypes.map((type, index) => (
+                                                        <span
+                                                            key={index}
+                                                            className={`text-xs font-semibold px-2 py-1 rounded-full ${getBadgeColor(type)}`}
+                                                        >
+                                                        {type}
+                                                        </span>
+                                                    ))}
+                                                </TableCell>
+
+
+
+                                                <TableCell className="py-3">
+                                                    <Space size="middle">
+                                                        {/*<Link to={`edit/${category.id}`}>*/}
+                                                            <Button icon={<EditOutlined />} />
+                                                        {/*</Link>*/}
+                                                        {<Button danger icon={<CloseCircleFilled />}  />}
+                                                    </Space>
+                                                </TableCell>
+
+
 
                                                 {/*<TableCell className="py-3 text-gray-500 dark:text-gray-400">*/}
                                                 {/*    <div className="flex space-x-4">*/}

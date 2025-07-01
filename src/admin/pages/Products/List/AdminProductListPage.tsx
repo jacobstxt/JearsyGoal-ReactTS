@@ -1,10 +1,10 @@
 import {Table, TableBody, TableCell, TableHeader, TableRow} from "../../../../components/ui/table";
 import {APP_ENV} from "../../../../env";
-import {Link} from "react-router";
-import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
+import {CloseCircleFilled, EditOutlined} from "@ant-design/icons";
 import {useGetAllProductsQuery} from "../../../../services/apiProducts.ts";
 import LoadingOverlay from "../../../../components/ui/loading/LoadingOverlay.tsx";
 import React from "react";
+import {Button, Space} from "antd";
 
 const AdminProductListPage: React.FC = () => {
     const {data: products, isLoading} = useGetAllProductsQuery();
@@ -73,23 +73,35 @@ const AdminProductListPage: React.FC = () => {
                                                     </div>
                                                 </TableCell>
 
-                                                <TableCell className="py-3 text-gray-500 dark:text-gray-400">
-                                                    <div className="flex space-x-4">
-                                                        <Link
-                                                            to={`edit/${product.id}`}
-                                                            className="flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
-                                                        >
-                                                            <EditOutlined className="mr-1"/>
-                                                            <span className="font-medium underline">Edit</span>
-                                                        </Link>
+                                                {/*<TableCell className="py-3 text-gray-500 dark:text-gray-400">*/}
+                                                {/*    <div className="flex space-x-4">*/}
+                                                {/*        <Link*/}
+                                                {/*            to={`edit/${product.id}`}*/}
+                                                {/*            className="flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"*/}
+                                                {/*        >*/}
+                                                {/*            <EditOutlined className="mr-1"/>*/}
+                                                {/*            <span className="font-medium underline">Edit</span>*/}
+                                                {/*        </Link>*/}
 
-                                                        <div
-                                                            className="flex items-center cursor-pointer text-red-600 hover:text-red-800 transition-colors duration-200">
-                                                            <DeleteOutlined className="mr-1"/>
-                                                            <span className="font-medium underline">Remove</span>
-                                                        </div>
-                                                    </div>
+                                                {/*        <div*/}
+                                                {/*            className="flex items-center cursor-pointer text-red-600 hover:text-red-800 transition-colors duration-200">*/}
+                                                {/*            <DeleteOutlined className="mr-1"/>*/}
+                                                {/*            <span className="font-medium underline">Remove</span>*/}
+                                                {/*        </div>*/}
+                                                {/*    </div>*/}
+                                                {/*</TableCell>*/}
+
+
+                                                <TableCell className="py-3">
+                                                    <Space size="middle">
+                                                        {/*<Link to={`edit/${category.id}`}>*/}
+                                                        <Button icon={<EditOutlined />} />
+                                                        {/*</Link>*/}
+                                                        {<Button danger icon={<CloseCircleFilled />}  />}
+                                                    </Space>
                                                 </TableCell>
+
+
                                             </TableRow>
                                         );
                                     }

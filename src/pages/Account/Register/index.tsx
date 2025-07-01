@@ -37,8 +37,8 @@ const RegistrationPage: React.FC = () => {
     };
 
     return (
-        <div className="min-h-[80vh] flex items-center justify-center mt-7 px-4">
-            <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-800 animate-fade-in">
+        <div className="h-[620px] flex items-center justify-center px-4">
+            <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-800 animate-fade-in">
                 {isLoading && <LoadingOverlay />}
 
                 <h2 className="text-2xl font-semibold mb-6 text-center">Реєстрація</h2>
@@ -47,7 +47,6 @@ const RegistrationPage: React.FC = () => {
                     form={form}
                     layout="vertical"
                     onFinish={onFinish}
-                    className="space-y-4"
                 >
                     <Form.Item<IRegister>
                         label={<span className="text-gray-700 dark:text-white font-medium">Email</span>}
@@ -55,7 +54,7 @@ const RegistrationPage: React.FC = () => {
                         rules={[{ required: true, message: 'Вкажіть email' }]}
                     >
                         <Input
-                            className="rounded-lg py-2 px-4 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-orange-400 transition"
+                            className="rounded-lg  px-4 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-orange-400 transition"
                         />
                     </Form.Item>
 
@@ -67,7 +66,7 @@ const RegistrationPage: React.FC = () => {
                         rules={[{ required: true, message: 'Вкажіть email' }]}
                     >
                         <Input
-                            className="rounded-lg py-2 px-4 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-orange-400 transition"
+                            className="rounded-lg  px-4 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-orange-400 transition"
                         />
                     </Form.Item>
 
