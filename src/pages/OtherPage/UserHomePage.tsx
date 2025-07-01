@@ -1,63 +1,56 @@
 import { Link } from "react-router-dom";
 import {useGetAllCategoriesQuery} from "../../services/apiCategory.ts";
-import {APP_ENV} from "../../env";
 import React from "react";
+import Banner from "../../components/ui/baner/productBaner.tsx";
+import CategoriesGridOrSlider from "../../components/ui/slider/CategoriesGridOrSlider.tsx";
 
 const UserHomePage: React.FC = () => {
-    const { data: categories, error, isLoading } = useGetAllCategoriesQuery();
+    const { data: categories} = useGetAllCategoriesQuery();
 
     return (
         <div className="min-h-screen bg-white dark:bg-gray-900">
 
-
-            <section className="px-6 pt-20 pb-32 text-center bg-gradient-to-b from-red-200 to-white dark:from-gray-800 dark:to-gray-900">
-                <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-                    Смачна доставка у Тернополі
-                </h1>
-                <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8">
-                    Ви не уявляєте своє життя без смачної їжі й шукаєте, де замовити швидку доставку піци в Тернополі?<br/>
-                    <strong>Pizza 39 — це ваш найкращий вибір!</strong>
-                </p>
-                <Link
-                    to="products/"
-                    className="inline-block bg-red-600 hover:bg-red-500 text-white
-                    text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transition">
-                    Переглянути меню
-                </Link>
-            </section>
-
-
-            <section className="px-6 max-w-7xl mx-auto mt-10">
-                {isLoading && (
-                    <p className="text-center text-gray-500 dark:text-gray-400">Завантаження...</p>
-                )}
-                {error && (
-                    <p className="text-center text-red-600 dark:text-red-400">
-                        Помилка завантаження категорій
+            <section
+                className="
+        relative bg-gray-100
+        text-red-700 py-28 px-8 rounded-xl max-w-7xl mx-auto mb-16 shadow-lg overflow-hidden
+      "
+            >
+                <div className="max-w-3xl mx-auto text-center">
+                    <h1 className="text-5xl font-extrabold mb-6 tracking-wide">
+                        Найсмачніша піца у Тернополі — з доставкою додому!
+                    </h1>
+                    <p className="text-xl mb-8 max-w-xl mx-auto text-gray-700">
+                        Свіжоспечена, ароматна та з улюбленими інгредієнтами — зробіть замовлення вже зараз!
                     </p>
-                )}
-                {categories && (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                        {categories.map((category) => (
-                            <Link
-                                to={`/menu/${category.slug}`}
-                                key={category.id}
-                                className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition">
-                                <img
-                                    src={`${APP_ENV.IMAGES_1200_URL}${category.image}`}
-                                    alt={category.name}
-                                    className="w-full h-64 object-cover rounded-xl
-                                    transition-transform duration-500 ease-in-out group-hover:scale-110
-                                    group-hover:brightness-75"
-                                />
-                                <div className="absolute inset-0 flex items-center justify-center bg-black/40  transition">
-                                    <span className="text-white text-xl font-semibold">{category.name}</span>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
-                )}
+                    <Link
+                        to="/menu/pizza"
+                        className="
+            inline-block bg-red-600 text-white font-bold px-8 py-4 rounded-full shadow-lg
+            hover:bg-red-700 transition transform hover:-translate-y-1 hover:scale-105
+          "
+                    >
+                        Замовити піцу
+                    </Link>
+                </div>
+
+                {/* Декоративний елемент */}
+                <div className="absolute top-0 right-0 w-72 h-72 bg-red-100 opacity-30 rounded-full blur-3xl animate-pulse"></div>
             </section>
+
+
+
+
+            <div className="min-h-[250px] bg-white dark:bg-gray-900">
+                <Banner />
+            </div>
+
+            <section className="px-8 max-w-7xl mx-auto">
+                {categories && <CategoriesGridOrSlider categories={categories} />}
+            </section>
+
+
+
         </div>
     );
 };

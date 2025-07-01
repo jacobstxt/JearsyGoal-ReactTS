@@ -46,7 +46,7 @@ const AdminUsersListPage: React.FC = () => {
                                 <TableCell isHeader className="py-3 text-start">Ім'я та прізвище</TableCell>
                                 <TableCell isHeader className="py-3 text-start">email</TableCell>
                                 <TableCell isHeader className="py-3 text-start">Фото</TableCell>
-                                <TableCell isHeader className="py-3 text-start">Вхід</TableCell>
+                                <TableCell isHeader className="py-3 text-start">Інформація про вхід</TableCell>
                                 <TableCell isHeader className="py-3 text-start">Дії</TableCell>
                             </TableRow>
                         </TableHeader>
