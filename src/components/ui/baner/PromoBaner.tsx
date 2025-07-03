@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
-const Banner: React.FC = () => {
+const PromoBanner: React.FC = () => {
     return (
-        <section className="max-w-7xl mx-auto my-12 px-6 py-12 bg-gray-100 dark:bg-gray-800 rounded-xl shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="max-w-xl text-center md:text-left">
+        <>
+           <div className="max-w-xl text-center md:text-left">
                 <h3 className="text-3xl font-semibold text-gray-900 dark:text-white mb-2">
                     Акції та спеціальні пропозиції!
                 </h3>
@@ -13,7 +13,8 @@ const Banner: React.FC = () => {
                 </p>
                 <Link
                     to="/menu/promotions"
-                    className="inline-block bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition"
+                    className=" inline-block bg-red-600 text-white font-bold px-8 py-4 rounded-full shadow-lg
+            hover:bg-red-700 transition transform hover:-translate-y-1 hover:scale-105"
                 >
                     Переглянути акції
                 </Link>
@@ -23,8 +24,8 @@ const Banner: React.FC = () => {
                 alt="Спеціальна пропозиція"
                 className="w-full max-w-xs rounded-lg shadow-lg object-cover"
             />
-        </section>
+        </>
     );
 };
 
-export default Banner;
+export default PromoBanner;
