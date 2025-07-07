@@ -22,15 +22,6 @@ export interface IResetPasswordRequest {
     email: string;
 }
 
-export interface IUser {
-    id: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    image: string;
-    loginTypes: string[];
-}
-
 
 export const apiAccount = createApi({
     reducerPath: 'api/account',
@@ -83,10 +74,6 @@ export const apiAccount = createApi({
                 body: password
             })
         }),
-        getAllUsers: builder.query<IUser[], void>({
-            query: () => 'List',
-        }),
-
     }),
 });
 
@@ -97,5 +84,4 @@ export const {
     useForgotPasswordMutation,
     // useValidateResetTokenMutation,
     useResetPasswordMutation,
-    useGetAllUsersQuery
 } = apiAccount;
