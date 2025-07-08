@@ -5,17 +5,17 @@ import type {
 } from "./types.ts";
 
 export const apiUser = createApi({
-    reducerPath: 'api/User',
-    baseQuery: createBaseQuery('User'),
+    reducerPath: 'api/Users',
+    baseQuery: createBaseQuery('Users'),
     tagTypes: ['User'],
     endpoints: (builder) => ({
         getAllUsers: builder.query<IAdminUserItem[], void>({
-            query: () => '',
+            query: () => 'list',
             providesTags: ['User'],
         }),
         searchUsers: builder.query<ISearchResult<IAdminUserItem>, IUserSearchParams>({
             query: (params) => ({
-                url: 'Search',
+                url: 'search',
                 params,
             }),
             providesTags: (result) =>

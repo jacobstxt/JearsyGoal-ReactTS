@@ -15,6 +15,11 @@ export interface IForgotPasswordRequest {
     email: string;
 }
 
+export  interface IValidateTokenRequest {
+    token: string;
+    email: string;
+}
+
 export interface IResetPasswordRequest {
     password: string;
     confirmPassword: string;
@@ -26,6 +31,7 @@ export interface IResetPasswordRequest {
 export const apiAccount = createApi({
     reducerPath: 'api/account',
     baseQuery: createBaseQuery('account'),
+    tagTypes: ['Account'],
     endpoints: (builder) => ({
         login: builder.mutation<ILoginResponse, ILoginRequest>({
             query: (credentials) => ({
@@ -59,12 +65,12 @@ export const apiAccount = createApi({
             })
         }),
 
-        validateResetToken: builder.mutation<{token: string}, boolean>({
-            query: (token) => ({
-                url: 'ValidateResetToken',
-                method: 'POST',
-                body: {token}
-            })
+        validateResetToken: builder.query<{ isValid: boolean }, IValidateTokenRequest>({
+            query: (params) => ({
+                url: 'validateResetToken',
+                params, // це додасть параметри як query string: ?token=abc&email=...
+            }),
+            providesTags: ['Account'],
         }),
 
         resetPassword: builder.mutation<IResetPasswordRequest, void>({
@@ -82,6 +88,6 @@ export const {
     useRegisterMutation,
     useLoginByGoogleMutation,
     useForgotPasswordMutation,
-    // useValidateResetTokenMutation,
+    useValidateResetTokenQuery,
     useResetPasswordMutation,
 } = apiAccount;

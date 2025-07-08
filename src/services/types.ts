@@ -8,14 +8,14 @@ export interface ICategoryItem {
 export interface ICategoryCreate {
     name: string;
     slug: string;
-    image: string;
+    ImageFile: string;
 }
 
 export interface ICategoryEdit {
     id: number;
     name: string;
     slug: string;
-    image: string;
+    ImageFile: string;
 }
 
 export interface ICategoryDelete {
@@ -31,12 +31,12 @@ export interface ServerError {
 
 export interface IRegister
 {
-    Name: string;
-    Surname: string;
+    FirstName: string;
+    LastName: string;
     Email: string;
     Password: string;
     ConfirmPassword: string;
-    Avatar: string;
+    ImageFile: string;
 }
 
 

@@ -15,14 +15,14 @@ interface ProductCardProps {
         price: number;
         weight: number;
         productSize?: { name: string };
-        ingridients?: Ingredient[];
+        ingredients?: Ingredient[];
         productImages?: { name: string }[];
     };
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({product}) => {
     const mainImage = product.productImages?.[0]?.name;
-    const ingredients = product.ingridients || [];
+    const ingredients = product.ingredients || [];
     const visible = ingredients.slice(0, 2);
     const hidden = ingredients.slice(2);
 

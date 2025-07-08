@@ -11,7 +11,7 @@ const UserHomePage: React.FC = () => {
         <div className="bg-white dark:bg-gray-900">
 
             <section
-                className="relative bg-gray-100 text-red-700 py-28 px-8 rounded-xl
+                className="relative bg-gray-100 text-red-700 dark:bg-gray-800 py-28 px-8 rounded-xl
                  max-w-7xl mx-auto mb-16 shadow-lg overflow-hidden"
             >
                 <MainBanner />

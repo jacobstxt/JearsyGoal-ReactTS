@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {
     useAddProductMutation,
@@ -18,6 +18,7 @@ import {
 } from "antd";
 import LoadingOverlay from "../../../../components/ui/loading/LoadingOverlay.tsx";
 import DragDropUpload from "../../../../components/ui/images/DragDropUpload.tsx";
+import Swal from 'sweetalert2';
 
 
 const AdminProductCreatePage: React.FC = () => {
@@ -49,8 +50,22 @@ const AdminProductCreatePage: React.FC = () => {
             };
 
             await createProduct(dto).unwrap();
+
+            await Swal.fire({
+                icon: 'success',
+                title: 'Успіх',
+                text: 'Продукт успішно створено!',
+                timer: 2000,
+                showConfirmButton: false,
+            })
+
             navigate('/admin/products');
         } catch (err: any) {
+            await Swal.fire({
+                icon: 'error',
+                title: 'Помилка',
+                text: 'Не вдалося створити продукт. Перевірте введені дані.',
+            })
             console.error(err);
             message.error("Помилка створення продукту");
         }
@@ -112,7 +127,6 @@ const AdminProductCreatePage: React.FC = () => {
                         <Form.Item
                             label="Розмір"
                             name="productSizeId"
-                            rules={[{required: true, message: "Оберіть розмір"}]}
                         >
                             <Select placeholder="Оберіть розмір">
                                 {sizes.map((size) => (

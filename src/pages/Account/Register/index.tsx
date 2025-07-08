@@ -62,7 +62,7 @@ const RegistrationPage: React.FC = () => {
 
                     <Form.Item<IRegister>
                         label={<span className="text-gray-700 dark:text-white font-medium">Ім'я</span>}
-                        name="Name"
+                        name="FirstName"
                         rules={[{ required: true, message: 'Вкажіть email' }]}
                     >
                         <Input
@@ -72,7 +72,7 @@ const RegistrationPage: React.FC = () => {
 
                     <Form.Item<IRegister>
                         label={<span className="text-gray-700 dark:text-white font-medium">Прізвище</span>}
-                        name="Surname"
+                        name="LastName"
                         rules={[{ required: true, message: 'Вкажіть email' }]}
                     >
                         <Input
@@ -107,7 +107,7 @@ const RegistrationPage: React.FC = () => {
 
                     </div>
 
-                    <ImageUploadFormItem name="Avatar" label="Фото" />
+                    <ImageUploadFormItem name="ImageFile" label="Фото" />
 
 
                     <button

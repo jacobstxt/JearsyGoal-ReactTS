@@ -64,7 +64,7 @@ const CategoriesCreatePage: React.FC = () => {
                     <Input placeholder="Введіть слаг категорії"/>
                 </Form.Item>
 
-                    <ImageUploadFormItem name="image" label="Фоточка" />
+                    <ImageUploadFormItem name="ImageFile" label="Фоточка" />
 
                 <Form.Item label={null}>
                     <Button type="primary" htmlType="submit">
