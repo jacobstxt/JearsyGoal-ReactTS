@@ -3,7 +3,7 @@ import {TableCell, TableRow} from "../index.tsx";
 import {APP_ENV} from "../../../../env";
 import {Button, Space} from "antd";
 import {Link} from "react-router";
-import {CloseCircleFilled, EditOutlined} from "@ant-design/icons";
+import {EditOutlined} from "@ant-design/icons";
 import React from "react";
 
 interface UserTableItemProps {
@@ -21,11 +21,7 @@ const UserTableItem: React.FC<UserTableItemProps> = ({
                 </TableCell>
 
                 <TableCell className="py-3 text-gray-500 dark:text-gray-400">
-                    {user.firstName}
-                </TableCell>
-
-                <TableCell className="py-3 text-gray-500 dark:text-gray-400">
-                    {user.lastName}
+                    {user.fullName}
                 </TableCell>
 
                 <TableCell className="py-3 text-gray-500 dark:text-gray-400">
@@ -59,7 +55,7 @@ const UserTableItem: React.FC<UserTableItemProps> = ({
                     <div className="h-[50px] w-[50px] overflow-hidden rounded-md">
                         <img
                             src={user.image ? `${APP_ENV.IMAGES_100_URL}${user.image}` : '/images/user/default.png'}
-                            alt={user.firstName}
+                            alt={user.fullName}
                             className="h-full w-full object-cover"
                         />
                     </div>
@@ -67,13 +63,13 @@ const UserTableItem: React.FC<UserTableItemProps> = ({
 
                 <TableCell className="py-3">
                     <Space size="middle">
-                        <Link to={`#`}>
-                            <Button icon={<EditOutlined />} className="dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700" />
+                        <Link to={`edit/${user.id}`}>
+                            <Button icon={<EditOutlined />} />
                         </Link>
-
-                        <Button danger icon={<CloseCircleFilled />}/>
+                        {/*<Button danger icon={<CloseCircleFilled />} onClick={() => modalRef.current?.open(category.id)} />*/}
                     </Space>
                 </TableCell>
+
             </TableRow>
         </>
     );

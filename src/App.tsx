@@ -18,6 +18,7 @@ import EmailSentSuccessPage from './pages/Account/EmailSentSuccess';
 import ResetPassword from "./pages/Account/ResetPassword";
 import AdminUsersListPage from "./admin/pages/Users/List/AdminUsersList.tsx";
 import MenuCategoryPage from "./pages/Menu";
+import UsersEditPage from "./admin/pages/Users/Edit";
 
 const App: React.FC = () => {
     return (
@@ -60,6 +61,7 @@ const App: React.FC = () => {
 
                         <Route path="users">
                             <Route index  element={<AdminUsersListPage />} />
+                            <Route path={"edit/:id"}  element={<UsersEditPage/>} />
                         </Route>
 
 

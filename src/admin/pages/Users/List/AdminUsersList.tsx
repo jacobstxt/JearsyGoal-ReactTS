@@ -199,8 +199,7 @@ const UserListPage: React.FC = () => {
                         <TableHeader className="border-gray-100 dark:border-gray-800 border-y">
                             <TableRow>
                                 <TableCell isHeader>№</TableCell>
-                                <TableCell isHeader>Name</TableCell>
-                                <TableCell isHeader>Last name</TableCell>
+                                <TableCell isHeader>Full Name</TableCell>
                                 <TableCell isHeader>Email</TableCell>
                                 <TableCell isHeader>Created</TableCell>
                                 <TableCell isHeader>Roles</TableCell>

@@ -30,7 +30,6 @@ export const apiCategory = createApi({
             },
             invalidatesTags: ['Category'],
         }),
-
         updateCategory: builder.mutation<ICategoryItem, ICategoryEdit>({
             query: (newCategory) => {
                 try {
@@ -46,6 +45,7 @@ export const apiCategory = createApi({
             },
             invalidatesTags: ['Category','Categories'],
         }),
+
 
         getCategoryById: builder.query<ICategoryItem, number>({
             query: (id) => `${id}`,
