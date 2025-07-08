@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { APP_ENV } from "../../../env";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+// @ts-ignore
+import 'swiper/css';
 
 interface Category {
     id: string;

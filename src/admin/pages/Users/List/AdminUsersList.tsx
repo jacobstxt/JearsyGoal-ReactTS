@@ -10,6 +10,7 @@ import LoadingOverlay from "../../../../components/ui/loading/LoadingOverlay.tsx
 import UserTableItem from "../../../../components/ui/table/item/UserTableItem.tsx";
 import { DatePicker, Checkbox } from 'antd';
 import dayjs from 'dayjs';
+import { Dayjs } from 'dayjs';
 import type {IUserSearchParams} from "../../../../services/types.ts";
 const { RangePicker } = DatePicker;
 
@@ -77,7 +78,7 @@ const UserListPage: React.FC = () => {
         });
     };
 
-    const handleDateChange = (dates: { toISOString: () => any; }[]) => {
+    const handleDateChange = (dates: [Dayjs | null, Dayjs | null] | null) => {
         if (!dates) {
             updateSearchParams({ startDate: undefined, endDate: undefined, page: 1 });
             return;
@@ -89,6 +90,7 @@ const UserListPage: React.FC = () => {
             page: 1,
         });
     };
+
 
     if (isLoading) return <LoadingOverlay />;
     if (isError) return <p className="text-gray-600 dark:text-gray-400">Something went wrong.</p>;

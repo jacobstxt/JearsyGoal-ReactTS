@@ -80,7 +80,7 @@ const CategoriesListPage: React.FC = () => {
                                         <Link to={`edit/${category.id}`}>
                                             <Button icon={<EditOutlined />} />
                                         </Link>
-                                        <Button danger icon={<CloseCircleFilled />} onClick={() => modalRef.current?.open(category.id)} />
+                                        <Button danger icon={<CloseCircleFilled />} onClick={() => modalRef.current?.open(Number(category.id))} />
                                     </Space>
                                 </TableCell>
                                 

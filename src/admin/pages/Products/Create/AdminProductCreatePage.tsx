@@ -39,14 +39,14 @@ const AdminProductCreatePage: React.FC = () => {
         );
     };
 
-    const onFinish = async (values: any) => {
+    const onFinish = async (values: IProductCreate) => {
         try {
             const dto: IProductCreate = {
                 ...values,
                 ingredientIds,
                 imageFiles: images
-                    .map((f) => f.originFileObj)
-                    .filter((f): f is File => f instanceof File),
+                    .map((f) => f.originFileObj as File)
+                    .filter((f): f is File => !!f),
             };
 
             await createProduct(dto).unwrap();
