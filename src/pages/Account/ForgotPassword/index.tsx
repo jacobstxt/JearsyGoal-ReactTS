@@ -22,8 +22,8 @@ const ForgotPasswordPage: React.FC = () => {
 
 
     return (
-        <div className="min-h-[550px] flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+        <div className="min-h-[550px] flex items-center justify-center ">
+            <div className="bg-white p-8 rounded-2xl border border-gray-200 dark:border-gray-800 animate-fade-in shadow-lg w-full max-w-md">
                 {(isLoading)  && <LoadingOverlay />}
 
                 <h2 className="text-2xl font-semibold mb-6 text-center">Відновлення паролю</h2>

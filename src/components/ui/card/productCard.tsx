@@ -1,5 +1,6 @@
 import {Card, Col, Tooltip, Image} from 'antd';
 import {APP_ENV} from "../../../env";
+import React from "react";
 
 interface Ingredient {
     id: number;
@@ -34,11 +35,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({product}) => {
                     className="w-full flex flex-col"
                     cover={
                         mainImage ? (
+                            <div className={"p-2 border-b border-gray-200"}>
                             <img
                                 alt={product.name}
                                 src={`${APP_ENV.IMAGES_800_URL}${mainImage}`}
-                                className="h-[330px] w-full object-cover"
+                                className="h-[330px] w-full  object-cover"
                             />
+                            </div>
                         ) : null
                     }
                     title={product.name}
@@ -98,6 +101,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({product}) => {
                                     </div>
                                 </div>
                             )}
+
+                            <div className="flex justify-end">
+                            <button
+                                className=" inline-block bg-red-600 text-white font-bold px-5 py-2 rounded-full shadow-lg
+                                hover:bg-red-700 transition transform hover:-translate-y-1 hover:scale-103"
+                            >
+                                Додати в кошик
+                            </button>
+                           </div>
+
                         </div>
                     </div>
                 </Card>

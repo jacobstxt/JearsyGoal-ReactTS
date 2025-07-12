@@ -3,6 +3,7 @@ import {apiCategory} from "../services/apiCategory.ts";
 import { apiAccount } from "../services/apiAccount.ts";
 import {type TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import authReducer from './authSlice';
+import cartReducer from './cartSlice';
 import {apiProducts} from "../services/apiProducts.ts";
 import {apiUser} from "../services/apiUser.ts"; // шлях залежить від твоєї структури
 
@@ -11,6 +12,7 @@ import {apiUser} from "../services/apiUser.ts"; // шлях залежить в�
 export const store = configureStore({
     reducer: {
         auth: authReducer,
+        cart: cartReducer,
         [apiCategory.reducerPath]: apiCategory.reducer,
         [apiAccount.reducerPath]:apiAccount.reducer,
         [apiProducts.reducerPath]:apiProducts.reducer,

@@ -58,7 +58,7 @@ const LoginPage: React.FC = () => {
     });
 
     return (
-        <div className="min-h-[660px] flex items-center justify-center bg-white">
+        <div className="min-h-[560px] flex items-center justify-center bg-white">
             <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-800 animate-fade-in">
                 {(isLoginLoading || isGoogleLoading)  && <LoadingOverlay />}
 
@@ -108,7 +108,8 @@ const LoginPage: React.FC = () => {
                         Увійти через Google
                     </button>
 
-                    <Link to="/forgot-password" className="text-center text-gray-700 hover:underline">Забули пароль?</Link>
+
+                    <Link to="/forgot-password" className="block mt-3">Забули пароль?</Link>
 
 
 

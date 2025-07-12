@@ -13,7 +13,8 @@ const categoryMap: Record<string, string> = {
     salaty: 'Салати',
     sushi: 'Суші',
     "piza-sety": 'Піца сети',
-    pasty: 'Пасти'
+    pasty: 'Пасти',
+    sneky: 'Снеки'
 };
 
 

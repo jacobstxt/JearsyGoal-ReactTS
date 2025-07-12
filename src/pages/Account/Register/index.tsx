@@ -37,91 +37,62 @@ const RegistrationPage: React.FC = () => {
     };
 
     return (
-        <div className="h-[620px] flex items-center justify-center px-4">
-            <div className="w-full max-w-md bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-6 border border-gray-200 dark:border-gray-800 animate-fade-in">
+        <div className="h-[650px] flex items-center justify-center px-4">
+            <div className="w-full max-w-4xl bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-800 animate-fade-in flex gap-8">
                 {isLoading && <LoadingOverlay />}
 
-                <h2 className="text-2xl font-semibold mb-6 text-center">Реєстрація</h2>
+                <Form form={form} layout="vertical" onFinish={onFinish}>
+                    <div className="flex flex-col lg:flex-row gap-8">
+                        {/* Ліва колонка — поля */}
+                        <div className="w-full lg:w-2/3">
+                            <h2 className="text-2xl font-semibold mb-6 text-center">Реєстрація</h2>
 
-                <Form
-                    form={form}
-                    layout="vertical"
-                    onFinish={onFinish}
-                >
-                    <Form.Item<IRegister>
-                        label={<span className="text-gray-700 dark:text-white font-medium">Email</span>}
-                        name="Email"
-                        rules={[{ required: true, message: 'Вкажіть email' }]}
-                    >
-                        <Input
-                            className="rounded-lg  px-4 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-orange-400 transition"
-                        />
-                    </Form.Item>
+                            <Form.Item
+                                label="Email"
+                                name="Email"
+                                rules={[{ required: true, message: 'Вкажіть email' }]}
+                            >
+                                <Input className="rounded-lg ..." />
+                            </Form.Item>
 
-                    <div className="flex gap-4">
+                            <div className="flex gap-4">
+                                <Form.Item name="FirstName" label="Ім'я" className="w-1/2" rules={[{ required: true, message: 'Вкажіть імʼя' }]}>
+                                    <Input className="rounded-lg ..." />
+                                </Form.Item>
 
-                    <Form.Item<IRegister>
-                        label={<span className="text-gray-700 dark:text-white font-medium">Ім'я</span>}
-                        name="FirstName"
-                        rules={[{ required: true, message: 'Вкажіть email' }]}
-                    >
-                        <Input
-                            className="rounded-lg  px-4 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-orange-400 transition"
-                        />
-                    </Form.Item>
+                                <Form.Item name="LastName" label="Прізвище" className="w-1/2" rules={[{ required: true, message: 'Вкажіть прізвище' }]}>
+                                    <Input className="rounded-lg ..." />
+                                </Form.Item>
+                            </div>
 
-                    <Form.Item<IRegister>
-                        label={<span className="text-gray-700 dark:text-white font-medium">Прізвище</span>}
-                        name="LastName"
-                        rules={[{ required: true, message: 'Вкажіть email' }]}
-                    >
-                        <Input
-                            className="rounded-lg py-2 px-4 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-orange-400 transition"
-                        />
-                    </Form.Item>
+                            <div className="flex gap-4">
+                                <Form.Item name="Password" label="Пароль" className="w-1/2" rules={[{ required: true, message: 'Вкажіть пароль' }]}>
+                                    <Input.Password className="rounded-lg ..." />
+                                </Form.Item>
 
+                                <Form.Item name="ConfirmPassword" label="Підтвердження паролю" className="w-1/2" rules={[{ required: true, message: 'Підтвердіть пароль' }]}>
+                                    <Input.Password className="rounded-lg ..." />
+                                </Form.Item>
+                            </div>
+
+                        </div>
+
+                        {/* Права колонка — фото */}
+                        <div className="w-full lg:w-1/3 flex items-center justify-center">
+                            <ImageUploadFormItem name="ImageFile" label="Фото" />
+                        </div>
                     </div>
-
-                    <div className="flex gap-4">
-
-                    <Form.Item<IRegister>
-                        label={<span className="text-gray-700 dark:text-white font-medium">Пароль</span>}
-                        name="Password"
-                        rules={[{ required: true, message: 'Вкажіть пароль' }]}
-                    >
-                        <Input.Password
-                            className="rounded-lg py-2 px-4 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-orange-400 transition"
-                        />
-                    </Form.Item>
-
-
-                    <Form.Item<IRegister>
-                        label={<span className="text-gray-700 dark:text-white font-medium">Підтвердіть пароль</span>}
-                        name="ConfirmPassword"
-                        rules={[{ required: true, message: 'Вкажіть пароль' }]}
-                    >
-                        <Input.Password
-                            className="rounded-lg py-2 px-4 border-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-orange-400 transition"
-                        />
-                    </Form.Item>
-
-                    </div>
-
-                    <ImageUploadFormItem name="ImageFile" label="Фото" />
-
 
                     <button
                         type="submit"
-                        className="bg-red-500 hover:bg-red-700 transition
-                        text-white font-semibold px-4 py-2 rounded w-full mt-4">
-                        {isLoading ? 'Logging in...' : 'Зареєструватися'}
+                        className="bg-red-500 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded w-full mt-4 transition"
+                    >
+                        {isLoading ? 'Завантаження...' : 'Зареєструватися'}
                     </button>
-
 
                 </Form>
             </div>
         </div>
-
     );
 }
 

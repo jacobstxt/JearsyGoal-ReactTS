@@ -46,7 +46,7 @@ const ImageUploadFormItem: React.FC<ImageUploadFormItemProps> = ({
                 {!previewUrl ? (
                     <Dragger {...props} accept="image/*">
                         <p className="ant-upload-drag-icon">
-                            <InboxOutlined />
+                            <InboxOutlined style={{ fontSize: 30, color: 'red' }} />
                         </p>
                         <p className="ant-upload-text">
                             Натисніть або перетягніть фото сюди
