@@ -10,6 +10,7 @@ import {apiCart} from "../services/apiCart.ts"; // шлях залежить в�
 
 
 
+// @ts-ignore
 export const store = configureStore({
     reducer: {
         [apiCategory.reducerPath]: apiCategory.reducer,
@@ -30,6 +31,7 @@ export const store = configureStore({
         ),
 });
 
+// @ts-ignore
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 

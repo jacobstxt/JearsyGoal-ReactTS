@@ -5,10 +5,9 @@ import {APP_ENV} from "../../env";
 import {logout} from "../../store/authSlice.ts";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
-import {apiCart} from "../../../../my-react-ts/src/services/apiCart.ts";
-//import {addItem} from "../../../../my-react-ts/src/store/localCartSlice.ts";
 import {useCart} from "../../hooks/useCart.ts";
 import CartDrawer from "../../components/cart/CartDrawer";
+import {apiCart} from "../../services/apiCart.ts";
 
 const UserLayout: React.FC = () => {
     const { user } = useAppSelector(state=>state.auth);

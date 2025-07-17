@@ -3,7 +3,7 @@ import {APP_ENV} from "../../../env";
 import React from "react";
 import {useAppSelector} from "../../../store";
 import {useCart} from "../../../hooks/useCart.ts";
-import type {ICartItem} from "../../../../../my-react-ts/src/store/localCartSlice.ts";
+import type {ICartItem} from "../../../store/localCartSlice.ts";
 
 interface Ingredient {
     id: number;
