@@ -33,7 +33,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({product}) => {
 
     const { cart, addToCart } = useCart(user!=null);
 
-    const isInCart = cart.some((item: { productId: number; }) =>
+    const isInCart = cart.some((item: ICartItem) =>
         product && item.productId ===  product.id
     );
 
