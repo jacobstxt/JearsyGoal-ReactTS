@@ -40,6 +40,10 @@ export interface IRegister
 }
 
 
+export interface IAuthResponse {
+    token: string;
+}
+
 export interface CategoryItemModel {
     id: number;
     name: string;

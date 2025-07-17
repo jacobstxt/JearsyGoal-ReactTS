@@ -1,21 +1,31 @@
 import {Link, Outlet, useNavigate} from "react-router";
-import {LogOut, Pizza, Settings, ShoppingCart, User} from "lucide-react";
+import {LogOut, Pizza, Settings, User} from "lucide-react";
 import {useAppDispatch, useAppSelector} from "../../store";
 import {APP_ENV} from "../../env";
 import {logout} from "../../store/authSlice.ts";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import React from "react";
+import {apiCart} from "../../../../my-react-ts/src/services/apiCart.ts";
+//import {addItem} from "../../../../my-react-ts/src/store/localCartSlice.ts";
+import {useCart} from "../../hooks/useCart.ts";
+import CartDrawer from "../../components/cart/CartDrawer";
 
 const UserLayout: React.FC = () => {
     const { user } = useAppSelector(state=>state.auth);
-    const { items } = useAppSelector(state=>state.cart);
+
+    const { cart } = useCart(user!=null);
+
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
 
     function logoutUser() {
+        const serverCart = [...cart];
         dispatch(logout());
-        navigate('/');
+        console.log('Server cart', serverCart);
+        dispatch(apiCart.util.resetApiState()); // очищення кешу запитів кошика
+        console.log('Server cart', serverCart);
+
     }
 
 
@@ -42,16 +52,7 @@ const UserLayout: React.FC = () => {
 
 
                 <nav className="flex items-center gap-4">
-
-                    <Link to="/cart" className="relative">
-                        <ShoppingCart className="w-6 h-6 text-gray-700 hover:text-gray-900 transition" />
-                        {items.length > 0 && (
-                            <span className="absolute -top-2 -right-2 bg-red-700 text-black text-xs font-bold px-1.5 py-0.5 rounded-full">
-                           {items.length}
-                           </span>
-                        )}
-                    </Link>
-
+                    <CartDrawer />
 
                     {user ? (
                          user.roles.includes("Admin") ? (

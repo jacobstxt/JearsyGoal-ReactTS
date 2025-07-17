@@ -1,7 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { createBaseQuery } from '../utilities/createBaseQuery.ts';
-import type {IRegister} from "./types.ts";
+import type {IAuthResponse, IRegister} from "./types.ts";
 import {serialize} from "object-to-formdata";
+import type {RootState} from "../store";
+import {loginSuccess} from "../store/authSlice.ts";
+import {apiCart} from "./apiCart.ts";
+import {clearCart} from "../store/localCartSlice.ts";
+import type { Dispatch } from '@reduxjs/toolkit';
 
 export interface ILoginRequest {
     email: string;
@@ -28,18 +33,48 @@ export interface IResetPasswordRequest {
 }
 
 
+const handleAuthSuccess = async (
+    queryFulfilled: Promise<{ data: IAuthResponse }>,
+    dispatch: Dispatch,
+    getState: () => RootState
+) => {
+    try {
+        const { data } = await queryFulfilled;
+        if (data?.token) {
+            dispatch(loginSuccess(data.token));
+
+            const localCart = getState().localCart.items;
+            if (localCart.length > 0) {
+                await dispatch(apiCart.endpoints.addToCartsRange.initiate(localCart) as any).unwrap();
+            }
+
+            dispatch(clearCart());
+        }
+    } catch (error) {
+        console.error('Auth error:', error);
+    }
+};
+
+
+
 export const apiAccount = createApi({
     reducerPath: 'api/account',
     baseQuery: createBaseQuery('account'),
     tagTypes: ['Account'],
     endpoints: (builder) => ({
+
+
         login: builder.mutation<ILoginResponse, ILoginRequest>({
             query: (credentials) => ({
                 url: 'login',
                 method: 'POST',
                 body: credentials,
             }),
+            onQueryStarted: async (_arg, { dispatch, getState, queryFulfilled }) =>
+                handleAuthSuccess(queryFulfilled, dispatch, getState)
         }),
+
+
         register: builder.mutation<ILoginResponse, IRegister>({
             query: (credentials) => {
                 const formData = serialize(credentials);
@@ -54,7 +89,9 @@ export const apiAccount = createApi({
                 url: 'GoogleLogin',
                 method: 'POST',
                 body: {token}
-            })
+            }),
+            onQueryStarted: async (_arg, { dispatch, getState, queryFulfilled }) =>
+                handleAuthSuccess(queryFulfilled, dispatch, getState)
         }),
 
         forgotPassword: builder.mutation<IForgotPasswordRequest,void>({

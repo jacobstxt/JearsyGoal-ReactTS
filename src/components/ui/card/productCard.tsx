@@ -1,6 +1,9 @@
 import {Card, Col, Tooltip, Image} from 'antd';
 import {APP_ENV} from "../../../env";
 import React from "react";
+import {useAppSelector} from "../../../store";
+import {useCart} from "../../../hooks/useCart.ts";
+import type {ICartItem} from "../../../../../my-react-ts/src/store/localCartSlice.ts";
 
 interface Ingredient {
     id: number;
@@ -26,6 +29,34 @@ export const ProductCard: React.FC<ProductCardProps> = ({product}) => {
     const ingredients = product.ingredients || [];
     const visible = ingredients.slice(0, 2);
     const hidden = ingredients.slice(2);
+    const {user} = useAppSelector(state => state.auth);
+
+    const { cart, addToCart } = useCart(user!=null);
+
+    const isInCart = cart.some((item: { productId: number; }) =>
+        product && item.productId ===  product.id
+    );
+
+    const handleAddToCart = async () => {
+        if (!product) return;
+
+        console.log("product add", product);
+
+        const newItem: ICartItem = {
+            id: product.id,
+            productId: product.id,
+            quantity: 1,
+            sizeName: product.productSize?.name ?? "",
+            price: product.price,
+            imageName: product.productImages?.[0]?.name ?? "",
+            categoryId: 0,
+            categoryName: "",
+            name: product.name,
+        };
+
+        await addToCart(newItem);
+
+    };
 
     return (
         <Col xs={24} sm={12} md={8} lg={6}>
@@ -103,12 +134,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({product}) => {
                             )}
 
                             <div className="flex justify-end">
-                            <button
-                                className=" inline-block bg-red-600 text-white font-bold px-5 py-2 rounded-full shadow-lg
-                                hover:bg-red-700 transition transform hover:-translate-y-1 hover:scale-103"
-                            >
-                                Додати в кошик
-                            </button>
+
+                                <button className={`${
+                                    isInCart ? 
+                                        "bg-gray-400 cursor-not-allowed" : 
+                                        "bg-red-600 hover:bg-red-700 transition transform hover:-translate-y-1 hover:scale-103"
+                                } 
+                                text-white font-bold px-12 py-2 mt-5 shadow-lg rounded-full 
+                                 `}
+                                        onClick={!isInCart ? handleAddToCart : undefined}
+                                >
+                                    {isInCart ? "Вже в кошику" : "В кошик"}
+                                </button>
+
                            </div>
 
                         </div>
