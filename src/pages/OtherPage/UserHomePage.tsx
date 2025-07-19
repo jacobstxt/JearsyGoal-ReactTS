@@ -11,14 +11,14 @@ const UserHomePage: React.FC = () => {
         <div className="bg-white dark:bg-gray-900">
 
             <section
-                className="relative bg-gray-100 text-red-700 dark:bg-gray-800 py-28 px-8 rounded-xl
+                className="relative bg-white text-red-700 dark:bg-gray-800 py-28 px-8 rounded-xl
                  max-w-7xl mx-auto mb-16 shadow-lg overflow-hidden"
             >
                 <MainBanner />
             </section>
 
 
-            <section className="max-w-7xl mx-auto my-12 px-6 py-12 bg-gray-100
+            <section className="max-w-7xl mx-auto my-12 px-6 py-12 bg-white
             dark:bg-gray-800 rounded-xl shadow-md flex flex-col md:flex-row items-center justify-between gap-6">
                 <PromoBaner />
             </section>

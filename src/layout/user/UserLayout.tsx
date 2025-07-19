@@ -31,7 +31,7 @@ const UserLayout: React.FC = () => {
     return (
         <div className="min-h-screen flex flex-col bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
 
-            <header className="w-full py-4 px-6 bg-gray-300 text-white shadow-lg flex justify-between items-center">
+            <header className="w-full py-4 px-6 bg-white text-white shadow-lg flex justify-between items-center">
                 <h1
                     className="text-2xl font-bold tracking-wide flex items-center gap-2 cursor-pointer text-red-700 hover:text-red-900 transition-colors"
                     onClick={() => navigate('/')}
@@ -40,7 +40,7 @@ const UserLayout: React.FC = () => {
                     Pizza 39
                 </h1>
 
-                <div className="flex flex-row text-gray-700 gap-3 text-sm text-right leading-tight items-start">
+                <div className="hidden md:flex flex-row text-gray-700 gap-3 text-sm text-right leading-tight items-start">
                     <span>10:00 - 22:00</span>
                     <span>Точки видачі</span>
                     <span>Оплата та доставка</span>
@@ -148,16 +148,16 @@ const UserLayout: React.FC = () => {
                         <div className="flex items-center">
                             <Link
                                 to="/account/login"
-                                className="bg-gray-300 text-gray-700 hover:text-gray-500  font-semibold py-2 px-2 rounded-full transition-all duration-300"
+                                className="text-gray-700 hover:text-gray-500  font-semibold py-2 px-2 rounded-full transition-all duration-300"
                             >
                                 Вхід
                             </Link>
 
-                            <span className="text-white">/</span>
+                            <span className="text-gray-700">/</span>
 
                             <Link
                                 to="/account/register"
-                                className="bg-gray-300 text-gray-700 hover:text-gray-500 font-semibold py-2 px-2 rounded-full transition-all duration-300"
+                                className="text-gray-700 hover:text-gray-500 font-semibold py-2 px-2 rounded-full transition-all duration-300"
                             >
                                 Реєстрація
                             </Link>

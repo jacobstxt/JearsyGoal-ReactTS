@@ -5,12 +5,12 @@ import {type ICartItem} from "../../../store/localCartSlice.ts";
 import {APP_ENV} from "../../../env";
 import {useCart} from "../../../hooks/useCart.ts";
 import {ShoppingCart} from "lucide-react";
+import OrderForm from "../OrderForm";
 
 const {Text} = Typography;
 
 const CartDrawer: React.FC = () => {
     const [open, setOpen] = useState(false);
-
     const {user} = useAppSelector(state => state.auth);
 
     const {cart, addToCart, removeFromCart} = useCart(user != null);
@@ -87,18 +87,7 @@ const CartDrawer: React.FC = () => {
 
                 <Divider/>
 
-                <div
-                    style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}
-                >
-                    <Button
-                        type="default"
-                        className="!bg-red-600 !text-white hover:!bg-red-700 font-bold px-8 py-4 rounded-full shadow-md transition hover:scale-105"
-                    >
-                        Оформити замовлення
-                    </Button>
-
-
-                </div>
+                <OrderForm/>
             </Drawer>
         </>
     );

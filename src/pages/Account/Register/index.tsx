@@ -1,6 +1,6 @@
 import {useNavigate} from "react-router";
 import {Form, type FormProps, Input, message} from "antd";
-import type {IRegister, ServerError} from "../../../services/types.ts";
+import type {IAuthResponse, IRegister, ServerError} from "../../../services/types.ts";
 import {useFormServerErrors} from "../../../utilities/useFormServerErrors.ts";
 import LoadingOverlay from "../../../components/ui/loading/LoadingOverlay.tsx";
 import ImageUploadFormItem from "../../../components/ui/form/ImageUploadFormItem.tsx";
@@ -22,7 +22,7 @@ const RegistrationPage: React.FC = () => {
 
     const onFinish: FormProps<IRegister>['onFinish'] = async (values) => {
         try {
-            const result = await register(values).unwrap();
+            const result = await register(values).unwrap() as IAuthResponse;
             dispatch(loginSuccess(result.token));
             navigate('/');
         } catch (error) {
@@ -37,16 +37,13 @@ const RegistrationPage: React.FC = () => {
     };
 
     return (
-        <div className="h-[650px] flex items-center justify-center px-4">
-            <div className="w-full max-w-4xl bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-800 animate-fade-in flex gap-8">
+        <div className="min-h-[650px] flex items-center justify-center px-4">
+            <div className="max-w-4xl bg-white dark:bg-gray-900  rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-800 animate-fade-in">
                 {isLoading && <LoadingOverlay />}
 
                 <Form form={form} layout="vertical" onFinish={onFinish}>
-                    <div className="flex flex-col lg:flex-row gap-8">
-                        {/* Ліва колонка — поля */}
-                        <div className="w-full lg:w-2/3">
-                            <h2 className="text-2xl font-semibold mb-6 text-center">Реєстрація</h2>
-
+                    <h2 className="text-2xl font-semibold mb-6 text-center">Реєстрація</h2>
+                    <div className="flex flex-col">
                             <Form.Item
                                 label="Email"
                                 name="Email"
@@ -75,20 +72,18 @@ const RegistrationPage: React.FC = () => {
                                 </Form.Item>
                             </div>
 
-                        </div>
+                            <div>
+                                 <ImageUploadFormItem name="ImageFile" label="Фото" />
+                            </div>
 
-                        {/* Права колонка — фото */}
-                        <div className="w-full lg:w-1/3 flex items-center justify-center">
-                            <ImageUploadFormItem name="ImageFile" label="Фото" />
-                        </div>
+
+                            <button
+                                type="submit"
+                                className="bg-red-500 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded w-full mt-4 transition"
+                            >
+                                {isLoading ? 'Завантаження...' : 'Зареєструватися'}
+                            </button>
                     </div>
-
-                    <button
-                        type="submit"
-                        className="bg-red-500 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded w-full mt-4 transition"
-                    >
-                        {isLoading ? 'Завантаження...' : 'Зареєструватися'}
-                    </button>
 
                 </Form>
             </div>

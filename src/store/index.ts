@@ -6,7 +6,8 @@ import authReducer from './authSlice';
 import localCartReducer from './localCartSlice.ts';
 import {apiProducts} from "../services/apiProducts.ts";
 import {apiUser} from "../services/apiUser.ts";
-import {apiCart} from "../services/apiCart.ts"; // шлях залежить від твоєї структури
+import {apiCart} from "../services/apiCart.ts";
+import {apiOrder} from "../services/apiOrder.ts"; // шлях залежить від твоєї структури
 
 
 
@@ -18,6 +19,7 @@ export const store = configureStore({
         [apiProducts.reducerPath]:apiProducts.reducer,
         [apiUser.reducerPath]: apiUser.reducer,
         [apiCart.reducerPath]: apiCart.reducer,
+        [apiOrder.reducerPath]: apiOrder.reducer,
         auth: authReducer,
         localCart: localCartReducer
     },
@@ -27,7 +29,8 @@ export const store = configureStore({
             apiAccount.middleware,
             apiProducts.middleware,
             apiUser.middleware,
-            apiCart.middleware
+            apiCart.middleware,
+            apiOrder.middleware
         ),
 });
 

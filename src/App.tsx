@@ -43,6 +43,7 @@ const App: React.FC = () => {
                         <Route  path={"email-sent-success"} element={<EmailSentSuccessPage/>} />
                         <Route  path={"reset-password"} element={<ResetPassword/>} />
 
+
                     </Route>
 
                     <Route path={"admin"} element={<AdminLayout />}>
@@ -63,6 +64,7 @@ const App: React.FC = () => {
                             <Route index  element={<AdminUsersListPage />} />
                             <Route path={"edit/:id"}  element={<UsersEditPage/>} />
                         </Route>
+
 
 
                     </Route>
