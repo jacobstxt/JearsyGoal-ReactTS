@@ -70,8 +70,7 @@ const OrderForm: React.FC = () => {
                     layout="vertical"
                     onFinish={onFinish}
                     initialValues={{
-                        recipientName: user?.name || '',
-                        phoneNumber: user?.phone || '',
+                        recipientName: user?.name || ''
                     }}
                 >
                     <Form.Item<ICreateOrderItem>
