@@ -1,19 +1,25 @@
-import {Badge, Button, Drawer, List, Space, Image, Typography, Divider} from "antd";
+import {Badge, Button, List, Space, Image, Typography, Divider, Modal} from "antd";
 import {useAppSelector} from "../../../store";
 import React, {useState} from "react";
 import {type ICartItem} from "../../../store/localCartSlice.ts";
 import {APP_ENV} from "../../../env";
 import {useCart} from "../../../hooks/useCart.ts";
 import {ShoppingCart} from "lucide-react";
-import OrderForm from "../OrderForm";
+import {useNavigate} from "react-router";
 
 const {Text} = Typography;
 
 const CartDrawer: React.FC = () => {
     const [open, setOpen] = useState(false);
     const {user} = useAppSelector(state => state.auth);
+    const navigate = useNavigate();
 
     const {cart, addToCart, removeFromCart} = useCart(user != null);
+
+
+    const getTotalSum = (cart: ICartItem[]) =>
+        cart.reduce((sum, item) => sum + Number(item.price) * item.quantity!, 0);
+
 
     return (
         <>
@@ -24,11 +30,13 @@ const CartDrawer: React.FC = () => {
                               className="cursor-pointer w-7 h-7 text-gray-700 hover:text-gray-800 transform transition-transform duration-200 hover:scale-110" />
             </Badge>
 
-            <Drawer
+            <Modal
                 title="Ваш кошик"
-                onClose={() => setOpen(false)}
+                onCancel={() => setOpen(false)}
                 open={open}
-                width={400}
+                width={800}
+                height={800}
+                footer={null}
             >
 
                 <List
@@ -48,8 +56,8 @@ const CartDrawer: React.FC = () => {
                             <Space align="start">
                                 <Image
                                     src={`${APP_ENV.IMAGES_200_URL}${item.imageName}`}
-                                    width={64}
-                                    height={64}
+                                    width={128}
+                                    height={128}
                                     preview={false}
                                 />
                                 <div>
@@ -87,8 +95,37 @@ const CartDrawer: React.FC = () => {
 
                 <Divider/>
 
-                <OrderForm/>
-            </Drawer>
+                <div
+                    style={{
+                        border: "1px solid #f0f0f0",
+                        borderRadius: 8,
+                        padding: 16,
+                        backgroundColor: "#fafafa",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        marginBottom: 16
+                    }}
+                >
+                    <div>
+                        <Text strong style={{ fontSize: 18 }}>Сума до сплати:</Text>
+                        <br />
+                        <Text strong style={{ fontSize: 24, color: "#cf1322" }}>
+                            {getTotalSum(cart)} ₴
+                        </Text>
+                    </div>
+
+                    <Button className="!bg-red-600 justify-end !text-white hover:!bg-red-700 font-bold !mt-3 !px-8 !py-5 mb-3 rounded-full shadow-md transition hover:scale-105"
+                            onClick={() =>{
+                                setOpen(false)
+                                navigate("/checkout");
+                            }}>
+                                Оформити замовлення
+                    </Button>
+                </div>
+
+
+            </Modal>
         </>
     );
 };

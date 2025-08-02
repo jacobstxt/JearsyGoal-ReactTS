@@ -1,4 +1,4 @@
-import {Badge, Button, Drawer, Form, message, Input, Select, type FormProps} from "antd";
+import {Button, Form, message, Input, Select, type FormProps} from "antd";
 import {useAppSelector} from "../../../store";
 import React, {useState} from "react";
 import {
@@ -9,16 +9,18 @@ import {
 } from "../../../services/apiOrder.ts";
 import { skipToken } from "@reduxjs/toolkit/query";
 import {useGetCartQuery} from "../../../services/apiCart.ts";
+import type {ICartItem} from "../../../store/localCartSlice.ts";
+import {useNavigate} from "react-router";
 
 
 
-const OrderForm: React.FC = () => {
-    const [open, setOpen] = useState(false);
+const OrderFormPage: React.FC = () => {
     const { user } = useAppSelector((state) => state.auth);
     console.log(user);
-    const { refetch } = useGetCartQuery(undefined, { skip: !user });
+    const { data: cart, refetch } = useGetCartQuery(undefined, { skip: !user });
     console.log(refetch);
     const [createOrder, {isLoading}] = useCreateOrderMutation();
+    const navigate = useNavigate();
 
     const [selectedCityId, setSelectedCityId] = useState<number | null>(null);
     const [searchDepartmentText, setSearchDepartmentText] = useState<string>("");
@@ -41,9 +43,8 @@ const OrderForm: React.FC = () => {
             await createOrder(values);
             console.log('END CREATE ORDER');
             message.success('Order created');
-
             refetch();
-            setOpen(false);
+            navigate('/');
 
         } catch (err) {
             console.error('Create order failed:', err);
@@ -54,25 +55,33 @@ const OrderForm: React.FC = () => {
     console.log("PAYMENTS",paymentTypes);
     console.log("POSTDEPARTMENTS",postDepartments);
 
+
+    const getTotalSum = (cart: ICartItem[]) =>
+        cart.reduce((sum, item) => sum + Number(item.price) * item.quantity!, 0);
+
+    const getTotalQuantity = (cart: ICartItem[]) =>
+        cart.reduce((sum, item) => sum + item.quantity!, 0);
+
     console.log(user);
     return (
         <>
-            <Badge>
-                <Button className="!bg-red-600 !text-white hover:!bg-red-700 font-bold px-8 py-4 rounded-full shadow-md transition hover:scale-105" onClick={() => setOpen(true)}>Оформити замовлення</Button>
-            </Badge>
-            <Drawer
-                title="Оформлення замовлення"
-                onClose={() => setOpen(false)}
-                open={open}
-                width={800}
-            >
-                <Form
-                    layout="vertical"
-                    onFinish={onFinish}
-                    initialValues={{
-                        recipientName: user?.name || ''
-                    }}
-                >
+        <Form
+            layout="vertical"
+            onFinish={onFinish}
+            initialValues={{
+                recipientName: user?.name || ''
+            }}
+        >
+            <div className="max-w-6xl mx-auto">
+                <h1 className={"font-bold text-3xl mb-4"}>Оформлення замовлення</h1>
+
+
+            <div className={" my-8 flex gap-9 items-start"}>
+                <div className="flex-1">
+
+                    <section style={{ marginBottom: 24, padding: 16, border: "1px solid #ddd", borderRadius: 8 }}>
+
+                        <h3 className={"font-bold text-xl mb-4"}>Контактна інформація</h3>
                     <Form.Item<ICreateOrderItem>
                         label="Ім’я отримувача"
                         name="recipientName"
@@ -88,7 +97,11 @@ const OrderForm: React.FC = () => {
                     >
                         <Input/>
                     </Form.Item>
+                    </section>
 
+                    <section style={{ marginBottom: 24, padding: 16, border: "1px solid #ddd", borderRadius: 8 }}>
+
+                        <h3 className={"font-bold text-xl mb-4"}>Доставка</h3>
                     <Form.Item<ICreateOrderItem>
                         label="Місто"
                         rules={[{ required: true, message: "Оберіть місто" }]}
@@ -140,7 +153,10 @@ const OrderForm: React.FC = () => {
                             ))}
                         </Select>
                     </Form.Item>
+                    </section>
 
+                    <section style={{ marginBottom: 24, padding: 16, border: "1px solid #ddd", borderRadius: 8 }}>
+                        <h3 className={"font-bold text-xl mb-4"}>Оплата</h3>
                     <Form.Item<ICreateOrderItem>
                         label="Спосіб оплати"
                         name="paymentTypeId"
@@ -154,19 +170,54 @@ const OrderForm: React.FC = () => {
                             ))}
                         </Select>
                     </Form.Item>
+                    </section>
+
+                </div>
+
+                <div className="sticky top-6">
+                <div className="w-80 p-6 border border-gray-300 rounded-lg">
+                    <h3 className="text-xl font-semibold mb-4">Разом</h3>
+
+                    <div className="flex items-center justify-between mb-2">
+                        <p className="text-sm">
+                            {getTotalQuantity(cart || [])} {
+                                getTotalQuantity(cart || []) === 1 ? 'продукт'
+                                    : getTotalQuantity(cart || []) === 2 || getTotalQuantity(cart || []) === 3 || getTotalQuantity(cart || []) === 4  ? 'продукти'
+                                        : 'продуків'} на суму
+                        </p>
+                        <p className="text-base font-normal">{getTotalSum(cart || [])} ₴</p>
+                    </div>
+
+                    <div className="flex items-center justify-between mb-4">
+                        <p className="text-sm">Доставка</p>
+                        <p className="text-base font-normal">За тарифами <br></br> перевізника</p>
+                    </div>
+
+
+
+                    <hr className="mb-4 border-gray-300" />
+                    <div className={"flex items-center justify-between mb-4"}>
+                        <h1 className="text-sm ">До сплати</h1>
+                        <p className="text-2xl font-bold">{getTotalSum(cart || [])} ₴</p>
+                    </div>
+
+                    <hr className="mb-4 border-gray-300" />
 
                     <Form.Item>
                         <Button type="default"
-                                className="!bg-red-600 !text-white hover:!bg-red-700 font-bold px-8 py-4 rounded-full shadow-md transition hover:scale-105"
+                                className="!bg-red-600 !text-white hover:!bg-red-700 font-bold mt-5 !h-[45px] !text-lg  w-full rounded-full shadow-md transition hover:scale-105"
                                 htmlType="submit" loading={isLoading}>
-                            Підтвердити замовлення
+                            Замовлення підтверджую
                         </Button>
                     </Form.Item>
-                </Form>
-            </Drawer>
+                </div>
+                </div>
 
+            </div>
+            </div>
+        </Form>
         </>
     );
 };
 
-export default OrderForm;
+export default OrderFormPage;
