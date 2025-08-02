@@ -103,8 +103,8 @@ const UserListPage: React.FC = () => {
             <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
 
                 <div className="flex flex-col gap-2 mb-4 sm:flex-row sm:items-center sm:justify-between">
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white/90">
-                        Users
+                    <h3 className="text-2xl font-semibold text-gray-800 dark:text-white/90">
+                        Користувачі
                     </h3>
 
                     <div className="flex items-center gap-3">
@@ -201,13 +201,13 @@ const UserListPage: React.FC = () => {
                         <TableHeader className="border-gray-100 dark:border-gray-800 border-y">
                             <TableRow>
                                 <TableCell isHeader>№</TableCell>
-                                <TableCell isHeader>Full Name</TableCell>
+                                <TableCell isHeader>Ім'я та прізвище</TableCell>
                                 <TableCell isHeader>Email</TableCell>
-                                <TableCell isHeader>Created</TableCell>
-                                <TableCell isHeader>Roles</TableCell>
-                                <TableCell isHeader>Login types</TableCell>
-                                <TableCell isHeader>Image</TableCell>
-                                <TableCell isHeader>Action</TableCell>
+                                <TableCell isHeader>Дата створення</TableCell>
+                                <TableCell isHeader>Ролі</TableCell>
+                                <TableCell isHeader>Тип входу</TableCell>
+                                <TableCell isHeader>Фото</TableCell>
+                                <TableCell isHeader>Дія</TableCell>
                             </TableRow>
                         </TableHeader>
 

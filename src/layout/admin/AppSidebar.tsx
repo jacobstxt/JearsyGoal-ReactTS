@@ -24,30 +24,30 @@ type NavItem = {
 const navItems: NavItem[] = [
     {
         icon: <GridIcon />,
-        name: "Dashboard",
-        subItems: [{ name: "DashboardHome", path: "/admin/home", pro: false }],
+        name: "Головна",
+        subItems: [{ name: "Панель", path: "/admin/home", pro: false }],
     },
     {
-        name: "Categories",
+        name: "Категорії",
         icon: <TableIcon />,
         subItems: [
-            { name: "List", path: "/admin/categories", pro: false },
-            { name: "Create", path: "/admin/categories/create", pro: false }
+            { name: "Список", path: "/admin/categories", pro: false },
+            { name: "Створити", path: "/admin/categories/create", pro: false }
         ],
     },
     {
-        name: "Products",
+        name: "Продукти",
         icon: <TableIcon />,
         subItems: [
-            { name: "List", path: "/admin/products", pro: false },
-            {name: "Create", path: "/admin/products/create", pro: false}
+            { name: "Список", path: "/admin/products", pro: false },
+            {name: "Створити", path: "/admin/products/create", pro: false}
         ],
     },
     {
-        name: "Users",
+        name: "Користувачі",
         icon: <UserIcon />,
         subItems: [
-            { name: "List", path: "/admin/users", pro: false }
+            { name: "Список", path: "/admin/users", pro: false }
         ],
     }
 ];
